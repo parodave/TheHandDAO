@@ -3,17 +3,20 @@ export const metadata = {
   description: "Terms & Privacy (draft).",
 };
 
+import Section from "@/components/ui/Section";
+import { H1, Subtle } from "@/components/ui/Heading";
+import Card from "@/components/ui/Card";
+
 export default function LegalPage() {
   return (
-    <section className="container py-16 space-y-6">
-      <h1 className="text-3xl md:text-4xl font-bold">Legal</h1>
-      <p className="subtle">Terms of Service &amp; Privacy Policy — Draft.</p>
-      <div className="border border-black p-6">
-        <p className="subtle">
+    <Section className="py-12 space-y-6">
+      <H1>Legal</H1>
+      <Subtle>Terms of Service &amp; Privacy Policy — Draft.</Subtle>
+      <Card>
+        <p className="text-sm text-[var(--muted)]">
           This project is under active development. Legal content will be added later.
         </p>
-      </div>
-    </section>
+      </Card>
+    </Section>
   );
 }
-

@@ -1,10 +1,13 @@
-'use client';
+"use client";
 import { useAccount, useBalance } from 'wagmi';
 import { useEffect, useMemo, useState } from 'react';
 import { getVote, setVote } from '@/lib/daoClient';
 import { getStatus } from "@/lib/siweClient";
 import { tokenIssue, tokenStatus } from "@/lib/tokenClient";
-import Link from "next/link";
+import Section from "@/components/ui/Section";
+import Card from "@/components/ui/Card";
+import { motion } from "framer-motion";
+import { fadeUp, stagger } from "@/lib/motion";
 
 export default function DAOPage() {
   const { address, isConnected, chain } = useAccount();
@@ -60,7 +63,7 @@ export default function DAOPage() {
       setChoice(getVote(address, id));
     }, [address, id]);
     return (
-      <div className="border p-4">
+      <Card>
         <h3 className="font-semibold">{title}</h3>
         <p className="text-sm mb-3">{text}</p>
         <div className="flex gap-3">
@@ -84,67 +87,76 @@ export default function DAOPage() {
             {choice ? `Your vote: ${choice}` : 'No vote yet'}
           </span>
         </div>
-      </div>
+      </Card>
     );
   }
 
   return (
-    <main className="mx-auto max-w-6xl px-6 py-10">
-      <h1 className="text-5xl font-bold mb-2">DAO Dashboard</h1>
-      <p className="mb-8">Basic overview. Live data will be added later.</p>
+    <main>
+      <Section className="py-12">
+        <motion.div variants={stagger} initial="hidden" animate="show">
+          <motion.h1 className="text-5xl font-bold mb-2" variants={fadeUp}>DAO Dashboard</motion.h1>
+          <motion.p className="mb-8" variants={fadeUp}>Basic overview. Live data will be added later.</motion.p>
 
-      <section className="mb-8 border p-4">
-        <h2 className="font-semibold mb-2">Wallet</h2>
-        {!isConnected ? (
-          <p>Not connected. Use the button in the header.</p>
-        ) : (
-          <div className="space-y-1">
-            <p>
-              Address: <span className="font-mono">{address}</span>
-            </p>
-            <p>Chain: {chain?.name ?? 'Unknown'}</p>
-            <p>Balance: {bal ? `${bal.formatted} ${bal.symbol}` : '…'}</p>
+          <motion.div variants={fadeUp} className="mb-8">
+            <Card>
+              <h2 className="font-semibold mb-2">Wallet</h2>
+              {!isConnected ? (
+                <p>Not connected. Use the button in the header.</p>
+              ) : (
+                <div className="space-y-1">
+                  <p>Address: <span className="font-mono">{address}</span></p>
+                  <p>Chain: {chain?.name ?? 'Unknown'}</p>
+                  <p>Balance: {bal ? `${bal.formatted} ${bal.symbol}` : '…'}</p>
+                </div>
+              )}
+            </Card>
+          </motion.div>
+
+          {!isMember && (
+            <motion.div variants={fadeUp} className="mb-8">
+              <Card>
+                <p className="mb-2">You are not verified as a member on this browser.</p>
+                <a href="/join" className="border px-3 py-1">Verify wallet on /join</a>
+              </Card>
+            </motion.div>
+          )}
+
+          {!hasToken && isMember && (
+            <motion.div variants={fadeUp} className="mb-8">
+              <Card>
+                <p className="mb-2">Get your access token to enter the members area.</p>
+                <button className="border px-3 py-1" onClick={()=>handleIssue(address)}>Get access token</button>
+                <span className="ml-3 text-sm opacity-70">Requires verified membership.</span>
+              </Card>
+            </motion.div>
+          )}
+
+          <motion.div variants={fadeUp} className="mb-10">
+            <h2 className="font-semibold mb-3">Proposals</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {proposals.map((p) => (
+                <VoteRow key={p.id} {...p} />
+              ))}
+            </div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card>
+              <h3 className="font-semibold mb-2">Members</h3>
+              <p>Coming soon</p>
+            </Card>
+            <Card>
+              <h3 className="font-semibold mb-2">Treasury</h3>
+              <p>Coming soon</p>
+            </Card>
+            <Card>
+              <h3 className="font-semibold mb-2">Proposals</h3>
+              <p>Coming soon</p>
+            </Card>
           </div>
-        )}
-      </section>
-      {!isMember && (
-        <div className="mb-8 border p-4">
-          <p className="mb-2">You are not verified as a member on this browser.</p>
-          <a href="/join" className="border px-3 py-1">Verify wallet on /join</a>
-        </div>
-      )}
-
-      {!hasToken && isMember && (
-        <div className="mb-8 border p-4">
-          <p className="mb-2">Get your access token to enter the members area.</p>
-          <button className="border px-3 py-1" onClick={()=>handleIssue(address)}>Get access token</button>
-          <span className="ml-3 text-sm opacity-70">Requires verified membership.</span>
-        </div>
-      )}
-
-      <section className="mb-10">
-        <h2 className="font-semibold mb-3">Proposals</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {proposals.map((p) => (
-            <VoteRow key={p.id} {...p} />
-          ))}
-        </div>
-      </section>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="border p-6">
-          <h3 className="font-semibold mb-2">Members</h3>
-          <p>Coming soon</p>
-        </div>
-        <div className="border p-6">
-          <h3 className="font-semibold mb-2">Treasury</h3>
-          <p>Coming soon</p>
-        </div>
-        <div className="border p-6">
-          <h3 className="font-semibold mb-2">Proposals</h3>
-          <p>Coming soon</p>
-        </div>
-      </div>
+        </motion.div>
+      </Section>
     </main>
   );
 }

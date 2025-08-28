@@ -24,3 +24,18 @@ a { @apply underline underline-offset-2 decoration-black hover:opacity-80 transi
 .nav-link { @apply no-underline; }
 hr { @apply border-black/10; }
 
+/* New monochrome tokens and focus styles */
+:root {
+  --bg: #0a0a0a;
+  --fg: #f5f5f5;
+  --muted: #9a9a9a;
+  --border: #1a1a1a;
+  --accent: #ffffff; /* white only */
+  --ring: 255 255 255; /* focus ring color */
+}
+* { outline: none; }
+:focus-visible { box-shadow: 0 0 0 2px rgba(var(--ring), 0.9); }
+html, body { background: var(--bg); color: var(--fg); }
+a { color: var(--fg); text-underline-offset: 3px; }
+.border { border-color: var(--border); }
+
