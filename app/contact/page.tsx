@@ -3,17 +3,21 @@ export const metadata = {
   description: "Get in touch.",
 };
 
+import Section from "@/components/ui/Section";
+import { H1, Subtle } from "@/components/ui/Heading";
+import Button from "@/components/ui/Button";
+
 export default function ContactPage() {
   return (
-    <section className="container py-16">
-      <h1 className="text-3xl md:text-4xl font-bold">Contact</h1>
+    <Section className="py-12">
+      <H1>Contact</H1>
+      <Subtle>Get in touch.</Subtle>
       <form className="mt-8 max-w-2xl space-y-4">
-        <input className="w-full border border-black p-3" placeholder="Name" />
-        <input className="w-full border border-black p-3" placeholder="Email" type="email" />
-        <textarea className="w-full border border-black p-3" placeholder="Message" rows={6} />
-        <button className="btn btn-primary">Send</button>
+        <input className="w-full border p-3" placeholder="Name" />
+        <input className="w-full border p-3" placeholder="Email" type="email" />
+        <textarea className="w-full border p-3" placeholder="Message" rows={6} />
+        <Button type="submit">Send</Button>
       </form>
-    </section>
+    </Section>
   );
 }
-
