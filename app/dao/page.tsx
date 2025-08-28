@@ -2,6 +2,7 @@
 import { useAccount, useBalance } from 'wagmi';
 import { useEffect, useMemo, useState } from 'react';
 import { getVote, setVote } from '@/lib/daoClient';
+import { getStatus } from "@/lib/siweClient";
 
 export default function DAOPage() {
   const { address, isConnected, chain } = useAccount();
@@ -10,6 +11,9 @@ export default function DAOPage() {
     chainId: chain?.id,
     query: { enabled: !!address },
   });
+
+  const [isMember, setIsMember] = useState(false);
+  useEffect(()=>{ getStatus().then(setIsMember).catch(()=>setIsMember(false)); },[]);
 
   const proposals = useMemo(
     () => [
@@ -94,6 +98,12 @@ export default function DAOPage() {
           </div>
         )}
       </section>
+      {!isMember && (
+        <div className="mb-8 border p-4">
+          <p className="mb-2">You are not verified as a member on this browser.</p>
+          <a href="/join" className="border px-3 py-1">Verify wallet on /join</a>
+        </div>
+      )}
 
       <section className="mb-10">
         <h2 className="font-semibold mb-3">Proposals</h2>
