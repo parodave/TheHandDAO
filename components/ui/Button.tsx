@@ -21,8 +21,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           },
           {
             'px-3 py-1.5 text-xs': size === 'sm',
-            'px-6 py-3 text-sm': size === 'md',
-            'px-8 py-4 text-base': size === 'lg',
+          'bg-black text-white hover:bg-white hover:text-black border-2 border-black': variant === 'default',
+          'bg-white text-black hover:bg-black hover:text-white border-2 border-black': variant === 'outline',
           },
           className
         )}

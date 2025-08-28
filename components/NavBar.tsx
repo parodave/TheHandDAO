@@ -33,7 +33,7 @@ export function NavBar({ locale, dict }: NavBarProps) {
             href={`/${locale}/`}
             className="font-mono uppercase tracking-widest text-lg focus:outline-black focus:outline-1"
           >
-            KR / THE HAND
+            THE HAND DAO
           </Link>
 
           {/* Desktop Navigation */}

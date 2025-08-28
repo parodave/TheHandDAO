@@ -10,7 +10,8 @@ export interface Dictionary {
     subtitle: string;
   };
   cta: {
-    getStarted: string;
+    joinDao: string;
+    learnMore: string;
   };
   notFound: {
     title: string;

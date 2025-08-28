@@ -1,14 +1,11 @@
-export default function Home() {
-  return (
-    <div
-      style={{
-        maxWidth: 1280,
-        margin: '0 auto',
-        padding: '2rem',
-        textAlign: 'center',
-      }}
-    >
-      Start prompting.
-    </div>
-  );
+import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
+
+export const metadata: Metadata = {
+  title: 'The Hand DAO - Minimalist Community Governance',
+  description: 'Minimalist black & white UI, community governance. Join The Hand DAO.',
+};
+
+export default function RootPage() {
+  redirect('/fr');
 }

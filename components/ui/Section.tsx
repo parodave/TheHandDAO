@@ -15,6 +15,7 @@ export function Section({
       className={cn(
         {
           'py-8': spacing === 'sm',
+          'py-0': spacing === 'none',
           'py-12': spacing === 'md',
           'py-16': spacing === 'lg',
           'py-24': spacing === 'xl',

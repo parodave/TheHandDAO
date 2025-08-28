@@ -15,12 +15,28 @@ export function Footer({ locale, dict }: FooterProps) {
     <footer className="border-t border-black bg-white mt-auto">
       <Container>
         <div className="py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-            <p className="text-label">
-              © {currentYear} {dict.footer.copyright}
+          <div className="flex flex-col items-center justify-center space-y-6">
+            <p className="text-label text-center">
+              © {currentYear} The Hand DAO — All rights reserved
             </p>
             
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-8">
+              <a
+                href="https://twitter.com/thehanddao"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-label border-b-hover focus:outline-black focus:outline-1"
+              >
+                Twitter
+              </a>
+              <a
+                href="https://github.com/thehanddao"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-label border-b-hover focus:outline-black focus:outline-1"
+              >
+                GitHub
+              </a>
               <Link
                 href={`/${locale}/legal/`}
                 className="text-label border-b-hover focus:outline-black focus:outline-1"

@@ -8,11 +8,12 @@ export const en: Dictionary = {
     legal: 'Legal',
   },
   hero: {
-    title: 'KR / THE HAND',
-    subtitle: 'A new approach to digital creation and innovation.',
+    title: 'THE HAND — DAO',
+    subtitle: 'Minimalist black & white UI, community governance.',
   },
   cta: {
-    getStarted: 'Get Started',
+    joinDao: 'Join DAO',
+    learnMore: 'Learn More',
   },
   notFound: {
     title: 'Page not found',

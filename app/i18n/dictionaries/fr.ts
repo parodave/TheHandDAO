@@ -8,11 +8,12 @@ export const fr: Dictionary = {
     legal: 'Légal',
   },
   hero: {
-    title: 'KR / THE HAND',
-    subtitle: 'Une nouvelle approche de la création digitale et de l\'innovation.',
+    title: 'THE HAND — DAO',
+    subtitle: 'Interface minimaliste noir et blanc, gouvernance communautaire.',
   },
   cta: {
-    getStarted: 'Commencer',
+    joinDao: 'Rejoindre DAO',
+    learnMore: 'En savoir plus',
   },
   notFound: {
     title: 'Page non trouvée',
