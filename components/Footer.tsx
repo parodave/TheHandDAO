@@ -1,14 +1,23 @@
 export default function Footer() {
   return (
-    <footer className="border-t border-black mt-20">
-      <div className="container py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-        <p className="subtle">© 2025 The Hand DAO — All rights reserved.</p>
-        <div className="flex gap-4">
-          <a href="https://twitter.com" target="_blank" rel="noreferrer" className="btn">Twitter</a>
-          <a href="https://github.com" target="_blank" rel="noreferrer" className="btn">GitHub</a>
-        </div>
+    <footer className="border-t">
+      <div className="container py-6 text-sm flex items-center justify-between">
+        <span>© 2025 The Hand DAO</span>
+        <nav className="flex gap-4">
+          <a href="#faq" className="hover:underline">
+            Docs
+          </a>
+          <a href="#dao" className="hover:underline">
+            Dashboard
+          </a>
+          <a href="#contact" className="hover:underline">
+            Contact
+          </a>
+          <a href="#legal" className="hover:underline">
+            Mentions
+          </a>
+        </nav>
       </div>
     </footer>
   );
 }
-
