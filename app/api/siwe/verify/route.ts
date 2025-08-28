@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { verifyMessage } from "viem/actions";
-import { createPublicClient, http, isAddress } from "viem";
+import { createPublicClient, http, isAddress, type Hex } from "viem";
 import { mainnet } from "viem/chains";
 
 export async function POST(req: Request) {
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     }
 
     const client = createPublicClient({ chain: mainnet, transport: http() });
-    const ok = await verifyMessage(client, { address, message, signature });
+    const ok = await verifyMessage(client, { address, message, signature: signature as Hex });
     if (!ok) return NextResponse.json({ ok:false, error:"verify_failed" }, { status: 401 });
 
     const res = NextResponse.json({ ok:true });

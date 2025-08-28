@@ -6,7 +6,7 @@ export async function getNonce() {
   const r = await fetch("/api/siwe/nonce"); return (await r.json()).nonce as string;
 }
 export async function signMessageWithWallet(message: string): Promise<`0x${string}`> {
-  // @ts-expect-error - injected provider typings
+  // @ts-ignore - injected provider typings
   const eth = window.ethereum; if (!eth) throw new Error("No wallet");
   const [account] = await eth.request({ method: "eth_requestAccounts" });
   const client = createWalletClient({ chain: mainnet, transport: custom(eth) });

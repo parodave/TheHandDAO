@@ -3,6 +3,8 @@ import { useAccount, useBalance } from 'wagmi';
 import { useEffect, useMemo, useState } from 'react';
 import { getVote, setVote } from '@/lib/daoClient';
 import { getStatus } from "@/lib/siweClient";
+import { tokenIssue, tokenStatus } from "@/lib/tokenClient";
+import Link from "next/link";
 
 export default function DAOPage() {
   const { address, isConnected, chain } = useAccount();
@@ -14,6 +16,13 @@ export default function DAOPage() {
 
   const [isMember, setIsMember] = useState(false);
   useEffect(()=>{ getStatus().then(setIsMember).catch(()=>setIsMember(false)); },[]);
+  const [hasToken, setHasToken] = useState(false);
+  useEffect(()=>{ tokenStatus().then((r:any)=>setHasToken(!!r.ok)).catch(()=>setHasToken(false)); },[]);
+  async function handleIssue(address?: string){
+    if (!address) return;
+    const ok = await tokenIssue(address);
+    if (ok) location.reload();
+  }
 
   const proposals = useMemo(
     () => [
@@ -102,6 +111,14 @@ export default function DAOPage() {
         <div className="mb-8 border p-4">
           <p className="mb-2">You are not verified as a member on this browser.</p>
           <a href="/join" className="border px-3 py-1">Verify wallet on /join</a>
+        </div>
+      )}
+
+      {!hasToken && isMember && (
+        <div className="mb-8 border p-4">
+          <p className="mb-2">Get your access token to enter the members area.</p>
+          <button className="border px-3 py-1" onClick={()=>handleIssue(address)}>Get access token</button>
+          <span className="ml-3 text-sm opacity-70">Requires verified membership.</span>
         </div>
       )}
 

@@ -3,6 +3,7 @@ import "./globals.css";
 import Providers from "./providers";
 import ConnectWallet from "@/components/ConnectWallet";
 import MemberBadge from "@/components/MemberBadge";
+import NavAuthLinks from "@/components/NavAuthLinks";
 
 export const metadata: Metadata = {
   title: "The Hand — DAO",
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <a href="/join" className="border px-3 py-1">Join DAO</a>
                 <ConnectWallet />
                 <MemberBadge />
+                <NavAuthLinks />
               </div>
             </div>
           </header>
