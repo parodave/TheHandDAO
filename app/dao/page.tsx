@@ -1,30 +1,47 @@
-export const metadata = {
-  title: "DAO — The Hand",
-  description: "DAO dashboard placeholder.",
-};
+"use client";
+import { useAccount, useBalance } from "wagmi";
 
-const cards = [
-  { title: "Members", value: "—", note: "Coming soon" },
-  { title: "Treasury", value: "—", note: "Coming soon" },
-  { title: "Proposals", value: "—", note: "Coming soon" },
-];
+export default function DAOPage() {
+  const { address, isConnected, chain } = useAccount();
+  const { data: bal } = useBalance({
+    address,
+    chainId: chain?.id,
+    query: { enabled: !!address },
+  });
 
-export default function DaoPage() {
   return (
-    <section className="container py-16">
-      <h1 className="text-3xl md:text-4xl font-bold">DAO Dashboard</h1>
-      <p className="subtle mt-2">Basic overview. Live data will be added later.</p>
+    <main className="mx-auto max-w-6xl px-6 py-10">
+      <h1 className="text-5xl font-bold mb-2">DAO Dashboard</h1>
+      <p className="mb-8">Basic overview. Live data will be added later.</p>
 
-      <div className="grid md:grid-cols-3 gap-6 mt-10">
-        {cards.map((c) => (
-          <div key={c.title} className="border border-black p-6">
-            <div className="text-sm opacity-70">{c.title}</div>
-            <div className="text-3xl font-extrabold mt-2">{c.value}</div>
-            <div className="subtle mt-2">{c.note}</div>
+      <section className="mb-8 border p-4">
+        <h2 className="font-semibold mb-2">Wallet</h2>
+        {!isConnected ? (
+          <p>Not connected. Use the button in the header.</p>
+        ) : (
+          <div className="space-y-1">
+            <p>Address: <span className="font-mono">{address}</span></p>
+            <p>Chain: {chain?.name ?? "Unknown"}</p>
+            <p>Balance: {bal ? `${bal.formatted} ${bal.symbol}` : "…"}</p>
           </div>
-        ))}
+        )}
+      </section>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="border p-6">
+          <h3 className="font-semibold mb-2">Members</h3>
+          <p>Coming soon</p>
+        </div>
+        <div className="border p-6">
+          <h3 className="font-semibold mb-2">Treasury</h3>
+          <p>Coming soon</p>
+        </div>
+        <div className="border p-6">
+          <h3 className="font-semibold mb-2">Proposals</h3>
+          <p>Coming soon</p>
+        </div>
       </div>
-    </section>
+    </main>
   );
 }
 
