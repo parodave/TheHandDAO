@@ -1,11 +1,11 @@
 import dynamic from 'next/dynamic';
-import { motion } from 'framer-motion';
 import CatalogGrid from '@/components/CatalogGrid';
 import StatCard from '@/components/StatCard';
 import ActionsPanel from '@/components/ActionsPanel';
 import TableMinimal from '@/components/TableMinimal';
 
 const HeroHand = dynamic(() => import('@/components/HeroHand'), { ssr: false });
+const HeroClient = dynamic(() => import('./HeroClient'), { ssr: false });
 
 export default function Page() {
   return (
@@ -37,20 +37,15 @@ export default function Page() {
       <section id="about" className="section">
         <div className="container py-16 md:py-24">
           <div className="grid md:grid-cols-3 gap-6">
-            {['Transparent', 'Composable', 'Monochrome'].map((t, i) => (
-              <motion.div
-                key={t}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.15, delay: i * 0.05 }}
-                className="border p-6"
-              >
-                <h3 className="font-semibold">{t}</h3>
-                <p className="mt-2 text-neutral-700">
-                  Pure black on white, clear rules.
-                </p>
-              </motion.div>
+            {['Transparent', 'Composable', 'Monochrome'].map((t) => (
+              <HeroClient key={t}>
+                <div className="border p-6">
+                  <h3 className="font-semibold">{t}</h3>
+                  <p className="mt-2 text-neutral-700">
+                    Pure black on white, clear rules.
+                  </p>
+                </div>
+              </HeroClient>
             ))}
           </div>
         </div>
