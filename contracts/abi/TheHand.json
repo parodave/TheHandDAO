@@ -1,0 +1,9 @@
+[
+  { "type":"function", "name":"isMember", "stateMutability":"view", "inputs":[{"name":"account","type":"address"}], "outputs":[{"type":"bool"}] },
+  { "type":"function", "name":"register", "stateMutability":"nonpayable", "inputs":[{"name":"ref","type":"bytes32"}], "outputs":[] },
+  { "type":"function", "name":"join", "stateMutability":"nonpayable", "inputs":[{"name":"inviteCode","type":"bytes32"}], "outputs":[] },
+  { "type":"function", "name":"mint", "stateMutability":"nonpayable", "inputs":[{"name":"companyId","type":"uint256"},{"name":"qty","type":"uint256"}], "outputs":[] },
+  { "type":"function", "name":"distribute", "stateMutability":"nonpayable", "inputs":[{"name":"companyId","type":"uint256"},{"name":"amount","type":"uint256"}], "outputs":[] },
+  { "type":"function", "name":"vote", "stateMutability":"nonpayable", "inputs":[{"name":"proposalId","type":"uint256"},{"name":"choice","type":"uint8"}], "outputs":[] }
+]
+

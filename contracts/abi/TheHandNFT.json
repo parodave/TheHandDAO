@@ -1,0 +1,4 @@
+[
+  { "type":"function","name":"safeMint","stateMutability":"nonpayable","inputs":[{"name":"to","type":"address"},{"name":"uri","type":"string"}],"outputs":[] }
+]
+

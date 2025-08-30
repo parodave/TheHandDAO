@@ -1,0 +1,8 @@
+{
+  "hero": { "title": "Govern. Build. Share." },
+  "cta": { "join": "Join DAO", "about": "About" },
+  "nav": { "dashboard": "Dashboard", "about": "About", "brand": "THE HAND", "join": "Join DAO" },
+  "dashboard": { "networkHint": "Target network: Base / Base Sepolia" },
+  "about": { "title": "About" },
+  "footer": { "copyright": "© 2025 The Hand DAO" }
+}

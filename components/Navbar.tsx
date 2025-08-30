@@ -1,76 +1,19 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useAccount } from 'wagmi';
-import { useRouter } from 'next/navigation';
+// Server Component (pas de "use client")
+import Link from "next/link";
+import LangSwitcher from "./LangSwitcher";
 
-const NAV = [
-  { id: 'home', label: 'Home' },
-  { id: 'about', label: 'DAO' },
-  { id: 'catalog', label: 'Entreprises' },
-  { id: 'faq', label: 'FAQ' },
-  { id: 'contact', label: 'Contact' },
-  { id: 'legal', label: 'Légal' },
-];
-
-export default function Navbar() {
-  const { isConnected } = useAccount();
-  const router = useRouter();
-  const [active, setActive] = useState<string>('home');
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(e.target.id);
-        });
-      },
-      { rootMargin: '-40% 0px -60% 0px', threshold: [0, 0.2, 0.6, 1] }
-    );
-    NAV.forEach((n) => {
-      const el = document.getElementById(n.id);
-      if (el) obs.observe(el);
-    });
-    return () => obs.disconnect();
-  }, []);
-
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const y = el.getBoundingClientRect().top + window.scrollY - 72; // offset header
-    window.scrollTo({ top: y, behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    if (isConnected) router.push('/dashboard');
-  }, [isConnected, router]);
-
+export default function Navbar({ dict, locale }: { dict: any; locale: "fr"|"en" }) {
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur border-b">
-      <div className="container flex h-16 items-center justify-between">
-        <button
-          onClick={() => scrollTo('home')}
-          className="font-semibold tracking-wide"
-        >
-          THE HAND
-        </button>
-        <nav className="hidden md:flex items-center gap-6">
-          {NAV.map((n) => (
-            <button
-              key={n.id}
-              onClick={() => scrollTo(n.id)}
-              className={`text-sm ${active === n.id ? 'underline' : 'hover:opacity-70'}`}
-            >
-              {n.label}
-            </button>
-          ))}
+    <header className="sticky top-0 z-40 bg-white border-b border-neutral-200">
+      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+        <nav className="flex items-center gap-6">
+          <Link href={`/${locale}`} className="font-medium tracking-wide">{dict.nav.brand}</Link>
+          <Link href={`/${locale}/dashboard`} className="hover:underline">{dict.nav.dashboard}</Link>
+          <Link href={`/${locale}/about`} className="hover:underline">{dict.nav.about}</Link>
         </nav>
-        <div className="flex items-center gap-3">
-          <button onClick={() => scrollTo('about')} className="btn-ghost">
-            Join DAO
-          </button>
-          <ConnectButton label="Connecter le portefeuille" />
-          <div className="text-xs">FR | EN</div>
+        <div className="flex items-center gap-6">
+          <Link href={`/${locale}/dashboard`} className="inline-flex h-10 px-6 border border-neutral-900 bg-white text-black hover:bg-black hover:text-white transition items-center">{dict.nav.join}</Link>
+          <LangSwitcher />
         </div>
       </div>
     </header>

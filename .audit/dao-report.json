@@ -1,0 +1,21 @@
+{
+  "network": "Base (8453)",
+  "chainId": 8453,
+  "latestBlock": "34873944",
+  "rpcLatencyMs": 1071,
+  "rainbowkitProjectIdPresent": false,
+  "addresses": {
+    "governor": "",
+    "treasury": "",
+    "erc721": "",
+    "snapshotSpace": ""
+  },
+  "governor": {
+    "quorum": "n/a"
+  },
+  "erc721": {
+    "name": "",
+    "symbol": "",
+    "totalSupply": ""
+  }
+}

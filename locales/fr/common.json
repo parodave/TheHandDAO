@@ -1,0 +1,8 @@
+{
+  "hero": { "title": "Gouvernez. Bâtissez. Partagez." },
+  "cta": { "join": "Rejoindre la DAO", "about": "À propos" },
+  "nav": { "dashboard": "Dashboard", "about": "About", "brand": "THE HAND", "join": "Join DAO" },
+  "dashboard": { "networkHint": "Réseau cible : Base / Base Sepolia" },
+  "about": { "title": "À propos" },
+  "footer": { "copyright": "© 2025 The Hand DAO" }
+}
