@@ -58,3 +58,24 @@ export async function mintNftMock(quantity: number) {
   await new Promise((r) => setTimeout(r, 800));
   return { ok: true, quantity };
 }
+
+
+// Stubs web3; à câbler avec wagmi/ethers
+export async function getMemberStatus(_addr: string) {
+  return { isMember: true };
+}
+export async function registerMember(_addr: string) {
+  return { txHash: "0x-register" };
+}
+export async function joinCompany(_companyId: string) {
+  return { txHash: "0x-join" };
+}
+export async function mintToken(_companyId: string, _qty: number) {
+  return { txHash: "0x-mint" };
+}
+export async function distribute(_companyId: string, _amount: number) {
+  return { txHash: "0x-distribute" };
+}
+export async function vote(_proposalId: string, _choice: 0 | 1) {
+  return { txHash: "0x-vote" };
+}

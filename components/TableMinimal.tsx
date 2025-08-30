@@ -1,25 +1,22 @@
-export default function TableMinimal() {
-  const rows = [
-    { date: '2025-08-01', action: 'mint', amt: '$999' },
-    { date: '2025-08-02', action: 'distribute', amt: '$450' },
-  ];
+"use client";
+type Props = { columns: string[]; rows: (string | number)[][] };
+export default function TableMinimal({ columns, rows }: Props) {
   return (
-    <div className="border p-4">
-      <div className="smallcaps">Historique</div>
-      <table className="w-full mt-3 text-sm">
+    <div className="w-full overflow-x-auto">
+      <table className="w-full border-collapse">
         <thead>
-          <tr className="border-b">
-            <th className="text-left py-2">Date</th>
-            <th className="text-left">Action</th>
-            <th className="text-left">Montant</th>
+          <tr className="border-b border-neutral-200">
+            {columns.map((c) => (
+              <th key={c} className="text-left text-sm py-3">{c}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          {rows.map((r) => (
-            <tr key={r.date} className="border-b">
-              <td className="py-2">{r.date}</td>
-              <td>{r.action}</td>
-              <td>{r.amt}</td>
+          {rows.map((r, i) => (
+            <tr key={i} className="border-b border-neutral-200">
+              {r.map((cell, j) => (
+                <td key={j} className="py-3 text-sm">{cell}</td>
+              ))}
             </tr>
           ))}
         </tbody>
